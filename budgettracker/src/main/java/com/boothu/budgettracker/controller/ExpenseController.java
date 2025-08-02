@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.boothu.budgettracker.model.Expense;
 import com.boothu.budgettracker.repository.ExpenseRepository;
 
+import jakarta.validation.Valid;
+
 @RestController // Marks class as a REST controller
 @RequestMapping("/expenses") // Classes methods are accessible via this URL path
 public class ExpenseController {
@@ -25,7 +27,7 @@ public class ExpenseController {
     // Endpoint: POST /expenses
     // Accepts a JSON object in the request body, converts it to an Expense object, and saves it to the database
     @PostMapping
-    public Expense addExpense(@RequestBody Expense expense) {
+    public Expense addExpense(@Valid @RequestBody Expense expense) {
         return expenseRepository.save(expense);
     }
 
