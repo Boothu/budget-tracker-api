@@ -55,4 +55,15 @@ public class ExpenseController {
         })
                 .orElseThrow(() -> new RuntimeException("Expense not found with ID " + id));
     }
+
+    // Endpoint: GET /expenses/total
+    @GetMapping("/total")
+    public Double getTotalSpending() {
+        double total = 0.0;
+        // Loop through every expense and add it to the total, then return it
+        for (Expense expense : expenseRepository.findAll()) {
+            total += expense.getAmount();
+        }
+        return total;
+    }
 }
