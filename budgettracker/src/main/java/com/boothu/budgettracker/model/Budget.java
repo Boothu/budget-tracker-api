@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Budget {
@@ -12,8 +13,10 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // No input validation for category or month so users can set a general budget without limitations
     private String category;
 
+    @Positive(message = "Amount must be positive")
     private double limitAmount;
 
     private String month;
