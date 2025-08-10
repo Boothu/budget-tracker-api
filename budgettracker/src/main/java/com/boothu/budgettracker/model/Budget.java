@@ -19,15 +19,16 @@ public class Budget {
     @Positive(message = "Amount must be positive")
     private double limitAmount;
 
-    private String month;
+    // E.g. '2025-08'
+    private String budgetMonth;
 
     public Budget() {
     }
 
-    public Budget(String category, double limitAmount, String month) {
+    public Budget(String category, double limitAmount, String budgetMonth) {
         this.category = category;
         this.limitAmount = limitAmount;
-        this.month = month;
+        this.budgetMonth = budgetMonth;
     }
 
     // Getters and setters
@@ -51,11 +52,11 @@ public class Budget {
         this.limitAmount = limitAmount;
     }
 
-    public String getMonth() {
-        return month;
+    public String getBudgetMonth() {
+        return budgetMonth;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public void setBudgetMonth(String budgetMonth) {
+        this.budgetMonth = budgetMonth;
     }
 }
