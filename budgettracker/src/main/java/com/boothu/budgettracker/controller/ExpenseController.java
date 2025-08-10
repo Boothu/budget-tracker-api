@@ -50,6 +50,7 @@ public class ExpenseController {
     public Expense updateExpense(@PathVariable Long id, @RequestBody Expense updatedExpense) {
         // If given expense id exists, updates its fields and saves it back to the database
         return expenseRepository.findById(id).map(expense -> {
+            expense.setCategory(updatedExpense.getCategory());
             expense.setDescription(updatedExpense.getDescription());
             expense.setAmount(updatedExpense.getAmount());
             expense.setDate(updatedExpense.getDate());

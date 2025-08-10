@@ -1,7 +1,5 @@
 package com.boothu.budgettracker.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,19 +17,23 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Allows database to auto generate the id via auto increment
     private Long id;
 
-    @NotBlank(message = "Description is required")
+    @NotBlank(message = "Category is required")
+    private String category;
+
     private String description;
 
     @Positive(message = "Amount must be positive")
     private double amount;
 
+    // E.g. '2025-08-10'
     @NotNull(message = "Date is required")
-    private LocalDate date;
+    private String date;
 
     public Expense() {
     }
 
-    public Expense(String description, double amount, LocalDate date) {
+    public Expense(String category, String description, double amount, String date) {
+        this.category = category;
         this.description = description;
         this.amount = amount;
         this.date = date;
@@ -43,6 +45,14 @@ public class Expense {
     }
 
     @NotBlank
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -59,11 +69,11 @@ public class Expense {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
