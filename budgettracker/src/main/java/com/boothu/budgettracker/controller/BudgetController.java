@@ -1,5 +1,6 @@
 package com.boothu.budgettracker.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,4 +105,38 @@ public class BudgetController {
         return total;
     }
 
+    // Endpoint: GET /budgets/overview/?budgetMonth=Y
+    @GetMapping("/overview")
+    public List<BudgetUsage> getBudgetOverview(@RequestParam String budgetMonth) {
+
+        // Get all budgets for given month
+        List<Budget> budgets = budgetRepository.findByBudgetMonth(budgetMonth);
+
+        // Throw exception if no budgets found
+        if (budgets.isEmpty()) {
+            throw new RuntimeException("No budgets found for this month");
+        }
+
+        // Create list which will hold the BudgetUsage objects
+        List<BudgetUsage> overviewList = new ArrayList<>();
+
+        for (Budget budget : budgets) {
+            // Create list of expenses in same category as current budget
+            List<Expense> categoryExpenses = expenseRepository.findByCategoryAndDateStartsWith(budget.getCategory(), budgetMonth);
+
+            // Loop through expenses and add to total
+            double totalSpent = 0.0;
+            for (Expense expense : categoryExpenses) {
+                totalSpent += expense.getAmount();
+            }
+
+            // Calculate remaining budget
+            double remaining = budget.getLimitAmount() - totalSpent;
+
+            // Add data for current budget to the overview list
+            overviewList.add(new BudgetUsage(budget.getCategory(), budgetMonth, budget.getLimitAmount(), totalSpent, remaining));
+        }
+        // Return every budget in given months usage
+        return overviewList;
+    }
 }

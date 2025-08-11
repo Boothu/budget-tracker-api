@@ -13,4 +13,6 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
     // Spring Data JPA reads the method name and automatically generates a query based on it
     List<Budget> findByCategoryAndBudgetMonth(String category, String budgetMonth);
 
+    public List<Budget> findByBudgetMonth(String budgetMonth);
+
 }
