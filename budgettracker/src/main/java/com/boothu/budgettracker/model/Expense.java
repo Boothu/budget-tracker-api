@@ -20,12 +20,14 @@ public class Expense {
     @NotBlank(message = "Category is required")
     private String category;
 
+    @NotBlank(message = "Description is required")
     private String description;
 
     @Positive(message = "Amount must be positive")
     private double amount;
 
     @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", message = "Date must be in YYYY-MM-DD format")
+    @NotBlank(message = "Date is required")
     private String date;
 
     public Expense() {

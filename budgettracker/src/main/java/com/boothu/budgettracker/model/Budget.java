@@ -22,6 +22,7 @@ public class Budget {
     private double limitAmount;
 
     @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])$", message = "Budget month must be in YYYY-MM format")
+    @NotBlank(message = "Budget Month is required")
     private String budgetMonth;
 
     public Budget() {
