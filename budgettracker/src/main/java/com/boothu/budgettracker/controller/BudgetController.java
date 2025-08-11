@@ -3,8 +3,11 @@ package com.boothu.budgettracker.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +71,37 @@ public class BudgetController {
         double remaining = budget.getLimitAmount() - totalSpent;
 
         return new BudgetUsage(category, budgetMonth, budget.getLimitAmount(), totalSpent, remaining);
+    }
+
+    // Endpoint: DELETE /budgets/{id}
+    @DeleteMapping("/{id}") // Maps this method to a DELETE request
+    // @PathVariable extracts {id} from the URL
+    public void deleteBudget(@PathVariable Long id) {
+        budgetRepository.deleteById(id);
+    }
+
+    // Endpoint: PUT /budgets/{id}
+    @PutMapping("/{id}") // Maps this method to a PUT request
+    public Budget updateBudget(@PathVariable Long id, @RequestBody Budget updatedBudget) {
+        // If given budget id exists, updates its fields and saves it back to the database
+        return budgetRepository.findById(id).map(budget -> {
+            budget.setCategory(updatedBudget.getCategory());
+            budget.setLimitAmount(updatedBudget.getLimitAmount());
+            budget.setBudgetMonth(updatedBudget.getBudgetMonth());
+            return budgetRepository.save(budget);
+        })
+                .orElseThrow(() -> new RuntimeException("Budget not found with ID " + id));
+    }
+
+    // Endpoint: GET /budgets/total
+    @GetMapping("/total")
+    public Double getTotalBudget() {
+        double total = 0.0;
+        // Loop through every budget and add it to the total, then return it
+        for (Budget budget : budgetRepository.findAll()) {
+            total += budget.getLimitAmount();
+        }
+        return total;
     }
 
 }
