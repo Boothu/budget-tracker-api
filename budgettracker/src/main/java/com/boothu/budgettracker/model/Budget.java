@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 @Entity
@@ -13,13 +15,13 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // No input validation for category or month so users can set a general budget without limitations
+    @NotBlank(message = "Category is required")
     private String category;
 
     @Positive(message = "Amount must be positive")
     private double limitAmount;
 
-    // E.g. '2025-08'
+    @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])$", message = "Budget month must be in YYYY-MM format")
     private String budgetMonth;
 
     public Budget() {

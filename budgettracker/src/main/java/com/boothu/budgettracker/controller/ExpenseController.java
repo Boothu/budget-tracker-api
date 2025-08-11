@@ -47,7 +47,7 @@ public class ExpenseController {
 
     // Endpoint: PUT /expenses/{id}
     @PutMapping("/{id}") // Maps this method to a PUT request
-    public Expense updateExpense(@PathVariable Long id, @RequestBody Expense updatedExpense) {
+    public Expense updateExpense(@PathVariable Long id, @Valid @RequestBody Expense updatedExpense) {
         // If given expense id exists, updates its fields and saves it back to the database
         return expenseRepository.findById(id).map(expense -> {
             expense.setCategory(updatedExpense.getCategory());

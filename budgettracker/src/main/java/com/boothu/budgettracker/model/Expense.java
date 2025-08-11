@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 @Entity // Marks that this class maps to database table
@@ -25,8 +25,7 @@ public class Expense {
     @Positive(message = "Amount must be positive")
     private double amount;
 
-    // E.g. '2025-08-10'
-    @NotNull(message = "Date is required")
+    @Pattern(regexp = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$", message = "Date must be in YYYY-MM-DD format")
     private String date;
 
     public Expense() {

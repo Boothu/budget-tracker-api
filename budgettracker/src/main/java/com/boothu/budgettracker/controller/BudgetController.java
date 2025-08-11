@@ -83,7 +83,7 @@ public class BudgetController {
 
     // Endpoint: PUT /budgets/{id}
     @PutMapping("/{id}") // Maps this method to a PUT request
-    public Budget updateBudget(@PathVariable Long id, @RequestBody Budget updatedBudget) {
+    public Budget updateBudget(@PathVariable Long id, @Valid @RequestBody Budget updatedBudget) {
         // If given budget id exists, updates its fields and saves it back to the database
         return budgetRepository.findById(id).map(budget -> {
             budget.setCategory(updatedBudget.getCategory());
