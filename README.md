@@ -23,7 +23,7 @@ git clone https://github.com/Boothu/budget-tracker-api.git
 ```
 2. Navigate to directory
 ```
-cd budget-tracker-api/budgettracker
+cd budget-tracker-api
 ```
 3. Run the application
 ```
