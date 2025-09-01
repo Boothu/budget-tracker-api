@@ -71,3 +71,10 @@ You can test the API using [Postman](https://www.postman.com/).
 3. Use the sample JSON bodies when testing POST requests
 
 4. Check results via GET requests
+
+## Preview
+<img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/BT%20PREVIEW%201.png" alt="Preview" width="650">
+<img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/BT%20PREVIEW%202.png" alt="Preview" width="650">
+<img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/BT%20PREVIEW%203.png" alt="Preview" width="650">
+<img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/BT%20PREVIEW%204.png" alt="Preview" width="650">
+
